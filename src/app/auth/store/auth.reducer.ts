@@ -11,7 +11,7 @@ const initialState: State = {
 export function authReducer(state = initialState, action: AuthActions.AuthActions) {
   switch (action.type) {
 
-    case 'LOGIN':
+    case AuthActions.LOGIN:
       const user = new User(action.payload.email,
         action.payload.userId,
         action.payload.token,
@@ -21,7 +21,7 @@ export function authReducer(state = initialState, action: AuthActions.AuthAction
         user: user
       };
 
-    case 'LOGOUT':
+    case AuthActions.LOGOUT:
        return {
          ...state,
          user: null
