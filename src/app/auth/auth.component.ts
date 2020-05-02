@@ -1,4 +1,4 @@
-import {Component, ComponentFactoryResolver, OnDestroy, ViewChild} from '@angular/core';
+import {Component, ComponentFactoryResolver, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {NgForm} from '@angular/forms';
 import {AuthResponseData, AuthService} from './auth.service';
 import {Observable, Subscription} from 'rxjs';
@@ -13,7 +13,7 @@ import {Store} from '@ngrx/store';
   selector: 'app-auth',
   templateUrl: './auth.component.html'
 })
-export class AuthComponent implements OnDestroy {
+export class AuthComponent implements OnInit, OnDestroy {
   @ViewChild(PlaceholderDirective) alertHost: PlaceholderDirective;
   isLoginMode = true;
   isLoading = false;
@@ -22,6 +22,13 @@ export class AuthComponent implements OnDestroy {
   constructor(private authService: AuthService, private router: Router,
               private componentFactoryResolver: ComponentFactoryResolver,
               private store: Store<fromApp.AppState>) {
+  }
+
+  ngOnInit() {
+    this.store.select('auth').subscribe(authState => {
+        this.isLoading = authState.loading;
+        this.error = authState.authError;
+    });
   }
 
   onSwitchMode() {
@@ -45,7 +52,8 @@ export class AuthComponent implements OnDestroy {
     } else {
       authObs = this.authService.signup(email, password);
     }
-  authObs.subscribe(responseData => {
+
+ /* authObs.subscribe(responseData => {
       console.log(responseData);
       this.isLoading = false;
     this.router.navigate(['/recipes']);
@@ -54,7 +62,7 @@ export class AuthComponent implements OnDestroy {
       this.error = errorMessage;
       this.showErrorAlert(errorMessage);
       this.isLoading = false;
-    });
+    });*/
     form.reset();
   }
 
