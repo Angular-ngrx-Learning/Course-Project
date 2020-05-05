@@ -32,7 +32,7 @@ export class AuthenticateFail implements Action {
 }
 
 export class SignupStart implements Action {
-  readonly type = AUTHENTICATE_FAIL;
+  readonly type = SIGNUP_START;
 
   constructor(public payload: {email: string; password: string}) {
   }

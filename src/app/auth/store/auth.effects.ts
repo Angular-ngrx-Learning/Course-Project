@@ -30,7 +30,7 @@ const handleAuthentication = (expiresIn: number, email: string, userId: string, 
 const handleError = (errorRes: any) => {
   let errorMessage = 'An unknown error occured';
   if  (!errorRes.error || !errorRes.error.error) {
-    return of(new AuthActions.AuthenticateFail(errorRes));
+    return of(new AuthActions.AuthenticateFail(errorMessage));
   }
   switch (errorRes.error.error.message) {
     case 'EMAIL_EXISTS':
@@ -43,7 +43,7 @@ const handleError = (errorRes: any) => {
       errorMessage = 'This password is not correct';
       break;
   }
-  return of(new AuthActions.AuthenticateFail(errorRes));
+  return of(new AuthActions.AuthenticateFail(errorMessage));
 };
 
 @Injectable()
