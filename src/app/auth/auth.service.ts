@@ -24,7 +24,7 @@ export class AuthService {
   private tokenExpirationTimer: any;
   constructor(private http: HttpClient, private router: Router, private store: Store<fromApp.AppState>) {}
 
-  signup(email: string, password: string) {
+  /*signup(email: string, password: string) {
     return this.http.post<AuthResponseData>(
       'https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=' + environment.firebaseAPIKey,
       {
@@ -44,7 +44,7 @@ export class AuthService {
       this.handleAuthentication(resData.email, resData.localId, resData.idToken, +resData.expiresIn);
     }));
   }
-
+*/
   autoLogin() {
     const userData: { email: string;
                      id: string;
@@ -69,7 +69,7 @@ export class AuthService {
   logout() {
     // this.user.next(null);
     this.store.dispatch(new AuthActions.Logout());
-    this.router.navigate(['/auth']);
+    // this.router.navigate(['/auth']);
     localStorage.removeItem('userData');
     if (this.tokenExpirationTimer) {
       clearTimeout(this.tokenExpirationTimer);
