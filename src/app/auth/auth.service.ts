@@ -22,7 +22,7 @@ export interface AuthResponseData {
 export class AuthService {
   // user = new BehaviorSubject<User>(null);
   private tokenExpirationTimer: any;
-  constructor(private http: HttpClient, private router: Router, private store: Store<fromApp.AppState>) {}
+  constructor(/*private http: HttpClient, private router: Router, */private store: Store<fromApp.AppState>) {}
 
   /*signup(email: string, password: string) {
     return this.http.post<AuthResponseData>(
@@ -45,7 +45,7 @@ export class AuthService {
     }));
   }
 */
-  autoLogin() {
+/*  autoLogin() {
     const userData: { email: string;
                      id: string;
                      _token: string;
@@ -75,16 +75,23 @@ export class AuthService {
       clearTimeout(this.tokenExpirationTimer);
     }
     this.tokenExpirationTimer = null;
-  }
+  }*/
 
-  autoLogout(expirationDuration: number) {
+  setLogoutTimer(expirationDuration: number) {
     console.log(expirationDuration);
     this.tokenExpirationTimer = setTimeout(() => {
-      this.logout();
+      this.store.dispatch(new AuthActions.Logout());
     }, expirationDuration);
   }
 
-  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
+  clearLogoutTimer() {
+    if (this.tokenExpirationTimer) {
+      clearTimeout(this.tokenExpirationTimer);
+      this.tokenExpirationTimer = null;
+    }
+  }
+
+/*  private handleAuthentication(email: string, userId: string, token: string, expiresIn: number) {
     const expirationDate = new Date(new Date().getTime() + expiresIn * 1000);
     const user = new User(email, userId, token, expirationDate);
     console.log(expiresIn);
@@ -112,5 +119,5 @@ export class AuthService {
          break;
     }
     return throwError(errorMessage);
-  }
+  }*/
 }
