@@ -2,7 +2,7 @@ import {Actions, Effect, ofType} from '@ngrx/effects';
 import * as AuthActions from './auth.actions';
 import {catchError, map, switchMap, tap} from 'rxjs/operators';
 import {environment} from '../../../environments/environment';
-import {AuthResponseData, AuthService} from '../auth.service';
+import { AuthService} from '../auth.service';
 import {HttpClient} from '@angular/common/http';
 import {of, throwError} from 'rxjs';
 import {Injectable} from '@angular/core';

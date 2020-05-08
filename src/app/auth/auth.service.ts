@@ -9,7 +9,7 @@ import {Store} from '@ngrx/store';
 import * as fromApp from '../store/app.reducer';
 import * as AuthActions from './store/auth.actions';
 
-export interface AuthResponseData {
+/*export interface AuthResponseData {
   kind: string;
   idToken: string;
   email: string;
@@ -17,7 +17,7 @@ export interface AuthResponseData {
   expiresIn: string;
   localId: string;
   registered?: string;
-}
+}*/
 @Injectable({providedIn: 'root'})
 export class AuthService {
   // user = new BehaviorSubject<User>(null);
