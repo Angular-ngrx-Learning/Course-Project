@@ -1,5 +1,5 @@
 import {Component, OnInit, EventEmitter, Output, OnDestroy} from '@angular/core';
-import {DataStorageService} from '../shared/data-storage.service';
+// import {DataStorageService} from '../shared/data-storage.service';
 import {AuthService} from '../auth/auth.service';
 import {Subscription} from 'rxjs';
 import * as fromApp from '../store/app.reducer';
@@ -19,10 +19,12 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
  // Router concepts @Output() featureSelected = new EventEmitter<string>();
 
-  constructor(private dataStorageService: DataStorageService, private authService: AuthService, private store: Store<fromApp.AppState>) { }
+  constructor(/*private dataStorageService: DataStorageService, private authService: AuthService,*/
+              private store: Store<fromApp.AppState>) { }
 
   onSaveData() {
-    this.dataStorageService.storeRecipes();
+  //  this.dataStorageService.storeRecipes();
+    this.store.dispatch(new RecipeActions.StoreRecipes());
   }
 
   onFetchData() {
