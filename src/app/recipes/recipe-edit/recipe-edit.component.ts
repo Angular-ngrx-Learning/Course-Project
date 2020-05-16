@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { FormGroup, FormControl, FormArray, Validators } from '@angular/forms';
-import { RecipeService } from '../recipe.service';
+// import { RecipeService } from '../recipe.service';
 import * as fromApp from '../../store/app.reducer';
 import {Store} from '@ngrx/store';
 import {map} from 'rxjs/operators';
@@ -24,7 +24,7 @@ export class RecipeEditComponent implements OnInit, OnDestroy {
     return (this.recipeForm.get('ingredients') as FormArray).controls;
   }
   constructor(private route: ActivatedRoute,
-    private recipeService: RecipeService,
+    /*private recipeService: RecipeService,*/
     private router: Router, private store: Store<fromApp.AppState>) { }
 
   ngOnInit() {
